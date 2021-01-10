@@ -3,12 +3,18 @@ package api
 import (
 	"fmt"
 	"github.com/ejiro-edwin/Blog/src/api/router"
+	"github.com/ejiro-edwin/Blog/src/config"
 	"log"
 	"net/http"
 )
 
 func Run()  {
-	fmt.Println("\n\tListening [::]:3000\n")
+	fmt.Printf("\n\tListening [::]:%d\n",config.PORT)
+	listen(config.PORT)
+}
+
+func listen(port int)  {
 	r := router.New()
-	log.Fatal(http.ListenAndServe(":3000", r))
+	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%d",port), r))
+
 }
